@@ -2,6 +2,7 @@ package fr.android.androidexercises
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.widget.ListView
 
 import java.util.ArrayList
@@ -21,8 +22,9 @@ class LibraryActivity : AppCompatActivity() {
         val books = books
 
         // TODO findViewById() and setAdapter()
-        val view = findViewById<ListView>(R.id.bookListView)
-        view.adapter = BookAdapter(this, books)
+        //val view = findViewById<ListView>(R.id.bookListView)
+        val view = findViewById<RecyclerView>(R.id.bookListView)
+        view.adapter = RecyclerAdapter(this, books)
 
     }
 
