@@ -31,7 +31,7 @@ class LibraryActivity : AppCompatActivity() {
         val client = OkHttpClient()
 
         val request = Request.Builder()
-                .url("https://api.github.com/users/blacroix")
+                .url("https://api.github.com/users/CapKicklee")
                 .build()
 
         client.newCall(request).enqueue(object : Callback {
