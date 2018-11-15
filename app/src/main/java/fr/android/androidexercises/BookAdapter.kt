@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import org.w3c.dom.Text
 
 class BookAdapter(context: Context, private val books: List<Book>) : BaseAdapter() {
 
@@ -33,13 +34,16 @@ class BookAdapter(context: Context, private val books: List<Book>) : BaseAdapter
         var view = convertView
         if (view == null) {
             view = inflater?.inflate(R.layout.custom_view_item_book, parent, false)
+            // !! permet de faire des appels en s'assurant qu'on a un objet (et donc éviter de retourner un optional)
+            view!!.tag = BookViewHolder(view!!.findViewById(R.id.nameTextView), view!!.findViewById(R.id.priceTextView))
         }
         val book = getItem(position)
-        view?.apply{
-            findViewById<TextView>(R.id.nameTextView)?.text = book?.name
-            view?.findViewById<TextView>(R.id.priceTextView)?.text = book?.price.toString()
-        }
+        val bookViewHolder: BookViewHolder = view?.tag as BookViewHolder
+        bookViewHolder.titleView.text = book?.name
+        bookViewHolder.priceView.text = book?.price.toString()
         return view
     }
+
+    data class BookViewHolder(val titleView: TextView, val priceView: TextView)
 
 }
