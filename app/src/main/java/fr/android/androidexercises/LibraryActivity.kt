@@ -16,6 +16,8 @@ class LibraryActivity : AppCompatActivity() {
 
         val messageTextView = findViewById<TextView>(R.id.messageTextView)
         // TODO call text on messageTextView
+        messageTextView.setText("China Number One")
+        messageTextView.setText(R.string.zboubinet)
 
         setSupportActionBar(toolbar)
     }
