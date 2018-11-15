@@ -11,6 +11,10 @@ class LibraryActivity : AppCompatActivity() {
 
     private var checkBox: CheckBox? = null
 
+    companion object {
+        const val CHECKBOX_STATE = "state"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
@@ -22,12 +26,15 @@ class LibraryActivity : AppCompatActivity() {
 
     public override fun onSaveInstanceState(outState: Bundle) {
         // TODO save check box state
+        val isChecked = this.checkBox?.isChecked()?:false
+        outState?.putBoolean(CHECKBOX_STATE, isChecked)
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         // TODO restore check box
+        checkBox?.setChecked(savedInstanceState.getBoolean(CHECKBOX_STATE))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
