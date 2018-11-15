@@ -34,16 +34,11 @@ class BookAdapter(context: Context, private val books: List<Book>) : BaseAdapter
         var view = convertView
         if (view == null) {
             view = inflater?.inflate(R.layout.custom_view_item_book, parent, false)
-            // !! permet de faire des appels en s'assurant qu'on a un objet (et donc éviter de retourner un optional)
-            view!!.tag = BookViewHolder(view!!.findViewById(R.id.nameTextView), view!!.findViewById(R.id.priceTextView))
         }
         val book = getItem(position)
-        val bookViewHolder: BookViewHolder = view?.tag as BookViewHolder
-        bookViewHolder.titleView.text = book?.name
-        bookViewHolder.priceView.text = book?.price.toString()
-        return view
+        val bookItemView = view as BookItemView
+        bookItemView.bindView(book!!)
+        return bookItemView
     }
-
-    data class BookViewHolder(val titleView: TextView, val priceView: TextView)
 
 }
