@@ -1,30 +1,40 @@
 package fr.android.androidexercises
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.TextView
 
 class BookAdapter(context: Context, private val books: List<Book>) : BaseAdapter() {
 
+    private var inflater: LayoutInflater? = null
+
     init {
         // TODO LayoutInflater.from()
+        inflater = LayoutInflater.from(context)
     }
 
     override fun getCount(): Int {
-        return 0 // TODO
+        return books.count()
     }
 
     override fun getItem(position: Int): Book? {
-        return null // TODO
+        return books[position]
     }
 
     override fun getItemId(position: Int): Long {
-        return 0 // TODO
+        return books[position].hashCode().toLong()
     }
 
-    override fun getView(position: Int, convertView: View, parent: ViewGroup): View? {
-        return null // TODO
+    // Il faut ajouter un '?' au View en paramètre car il peut être null au moment de l'initialisation du tableau
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
+        val view = inflater?.inflate(R.layout.custom_view_item_book, parent, false)
+        val book = getItem(position)
+        view?.findViewById<TextView>(R.id.nameTextView)?.text = book?.name
+        view?.findViewById<TextView>(R.id.priceTextView)?.text = book?.price.toString()
+        return view
     }
 
 }
