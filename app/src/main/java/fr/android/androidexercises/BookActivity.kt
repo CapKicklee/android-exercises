@@ -7,7 +7,7 @@ import android.widget.TextView
 class BookActivity : AppCompatActivity() {
 
     companion object {
-        private const val BOOK = "BOOK"
+        const val BOOK = "BOOK"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
