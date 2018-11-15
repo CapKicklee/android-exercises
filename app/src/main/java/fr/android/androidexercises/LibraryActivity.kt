@@ -1,5 +1,7 @@
 package fr.android.androidexercises
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +9,9 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.DatePicker
+import android.widget.Toast
+import java.util.*
 
 class LibraryActivity : AppCompatActivity() {
 
@@ -25,6 +30,23 @@ class LibraryActivity : AppCompatActivity() {
             // TODO add parcel book to intent
             intent.putExtra(BookActivity.BOOK, book)
             startActivity(intent)
+        }
+
+        val dateButton = findViewById<Button>(R.id.dateButton)
+        dateButton.setOnClickListener { v ->
+            var date = ""
+            val calendar = Calendar.getInstance()
+            DatePickerDialog(this,
+                    DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                        TimePickerDialog(this@LibraryActivity, TimePickerDialog.OnTimeSetListener {
+                            _, hourOfDay, minute ->
+                            Toast.makeText(this, "$dayOfMonth/$month/$year $hourOfDay:$minute", Toast.LENGTH_LONG).show()
+                        }, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), true).show()
+                    },
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)).show()
+
         }
     }
 
