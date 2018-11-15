@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import android.content.Intent
 
 class LibraryActivity : AppCompatActivity() {
 
@@ -20,7 +21,9 @@ class LibraryActivity : AppCompatActivity() {
 
         openButton.setOnClickListener {
             // Replace with startActivity() to start BookActivity
-            Toast.makeText(this@LibraryActivity, R.string.toast_todo, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this@LibraryActivity, R.string.toast_todo, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, BookActivity::class.java)
+            startActivity(intent)
         }
     }
 
