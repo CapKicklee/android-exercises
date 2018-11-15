@@ -30,10 +30,15 @@ class BookAdapter(context: Context, private val books: List<Book>) : BaseAdapter
 
     // Il faut ajouter un '?' au View en paramètre car il peut être null au moment de l'initialisation du tableau
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
-        val view = inflater?.inflate(R.layout.custom_view_item_book, parent, false)
+        var view = convertView
+        if (view == null) {
+            view = inflater?.inflate(R.layout.custom_view_item_book, parent, false)
+        }
         val book = getItem(position)
-        view?.findViewById<TextView>(R.id.nameTextView)?.text = book?.name
-        view?.findViewById<TextView>(R.id.priceTextView)?.text = book?.price.toString()
+        view?.apply{
+            findViewById<TextView>(R.id.nameTextView)?.text = book?.name
+            view?.findViewById<TextView>(R.id.priceTextView)?.text = book?.price.toString()
+        }
         return view
     }
 
